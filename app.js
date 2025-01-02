@@ -10,19 +10,26 @@ function createGrid(num) {
             div.style.width = `${size}px`;
             div.style.height = `${size}px`;
             div.style.backgroundColor = 'white';
-            div.style.border = '1px solid black';
+            div.style.border = '0.1px solid black';
             div.style.boxSizing = 'border-box';
 
             container.appendChild(div);
 
             div.addEventListener('mouseover', () => {
-                div.style.background = 'lightgrey';
+                let opacity = parseFloat(div.style.opacity) || 0;
+                opacity += 0.1;
+                if (opacity > 1) {
+                    opacity = 1;
+
+                }
+                div.style.opacity = opacity;
+                div.style.background = `rgb(${Math.floor(Math.random() * 256) + 1},${Math.floor(Math.random() * 256) + 1},${Math.floor(Math.random() * 256) + 1})`;
             })
         }
     }
 }
 
-let num = 20;
+let num = 16;
 
 resize.addEventListener('click', () => {
     let noOfSquares = parseInt(prompt('Enter the number of squares each side: '));
