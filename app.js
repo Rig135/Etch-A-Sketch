@@ -1,8 +1,8 @@
 const container = document.querySelector('.container');
-
+const resize = document.querySelector('#resize');
 
 function createGrid(num) {
-    const size = 500 / num;
+    const size = 600 / num;
     container.innerHTML = '';
     for (let i = 0; i < num; i++) {
         for (let j = 0; j < num; j++) {
@@ -24,7 +24,13 @@ function createGrid(num) {
 
 let num = 20;
 
-
+resize.addEventListener('click', () => {
+    let noOfSquares = parseInt(prompt('Enter the number of squares each side: '));
+    if (noOfSquares > 100) {
+        noOfSquares = 100;
+    }
+    createGrid(noOfSquares);
+})
 
 
 container.classList.add('grid');
