@@ -14,6 +14,7 @@ Random.addEventListener('click', () => {
 
 colorPicker.addEventListener('input', () => {
     selectedColor = colorPicker.value;
+    isRandom = false;
 })
 
 
