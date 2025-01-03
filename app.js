@@ -1,5 +1,21 @@
 const container = document.querySelector('.container');
 const resize = document.querySelector('#resize');
+const Random = document.querySelector('#randomize');
+const colorPicker = document.querySelector('#chooseColor');
+const clear = document.querySelector('#clear');
+
+let selectedColor = colorPicker.value;
+
+let isRandom = false;
+
+Random.addEventListener('click', () => {
+    isRandom = true;
+})
+
+colorPicker.addEventListener('input', () => {
+    selectedColor = colorPicker.value;
+})
+
 
 function createGrid(num) {
     const size = 600 / num;
@@ -16,6 +32,8 @@ function createGrid(num) {
             container.appendChild(div);
 
             div.addEventListener('mouseover', () => {
+
+
                 let opacity = parseFloat(div.style.opacity) || 0;
                 opacity += 0.1;
                 if (opacity > 1) {
@@ -23,23 +41,32 @@ function createGrid(num) {
 
                 }
                 div.style.opacity = opacity;
-                div.style.background = `rgb(${Math.floor(Math.random() * 256) + 1},${Math.floor(Math.random() * 256) + 1},${Math.floor(Math.random() * 256) + 1})`;
+                if (isRandom) {
+                    div.style.background = `rgb(${Math.floor(Math.random() * 256) + 1},${Math.floor(Math.random() * 256) + 1},${Math.floor(Math.random() * 256) + 1})`;
+                }
+                else {
+                    div.style.backgroundColor = selectedColor;
+                }
             })
         }
     }
 }
 
-let num = 16;
+let noOfSquares = 16;
 
 resize.addEventListener('click', () => {
-    let noOfSquares = parseInt(prompt('Enter the number of squares each side: '));
+    noOfSquares = parseInt(prompt('Enter the number of squares each side: '));
     if (noOfSquares > 100) {
         noOfSquares = 100;
     }
     createGrid(noOfSquares);
 })
 
+clear.addEventListener('click', () => {
+    createGrid(noOfSquares);
+})
+
 
 container.classList.add('grid');
 
-createGrid(num);
+createGrid(noOfSquares);
